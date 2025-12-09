@@ -212,20 +212,12 @@ source .venv/bin/activate      # On Windows: .venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-### 8.2 Training
-
-Example: fine-tune DeiT-Tiny on Dataset 1.
-
+## 8.2 Training
 python training/train.py \
     --model deit_tiny \
     --dataset dataset1 \
     --epochs 28 \
     --batch_size 32
 
-### 8.3 Evaluation
-python training/evaluate.py \
-    --model deit_tiny \
-    --dataset dataset1
 
-### 8.4 Text-to-Image Retrieval Demo
-jupyter notebook notebooks/demo.ipynb
+
