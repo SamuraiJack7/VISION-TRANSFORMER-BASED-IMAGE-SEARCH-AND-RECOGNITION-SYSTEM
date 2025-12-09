@@ -212,12 +212,6 @@ source .venv/bin/activate      # On Windows: .venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-## 8.2 Training
-python training/train.py \
-    --model deit_tiny \
-    --dataset dataset1 \
-    --epochs 28 \
-    --batch_size 32
 
 
 
