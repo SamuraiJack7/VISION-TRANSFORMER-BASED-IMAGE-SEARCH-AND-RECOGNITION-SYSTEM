@@ -197,20 +197,6 @@ The project yields several key observations about data quality, model capacity, 
    - Explore larger ViT variants for improved robustness once label quality is improved  
 
 ---
-## 8. Getting Started
-
-### 8.1 Installation
-
-```bash
-git clone <this-repo-url>
-cd <repo-folder>
-
-# Create and activate a virtual environment (optional but recommended)
-python -m venv .venv
-source .venv/bin/activate      # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
 
 
 
