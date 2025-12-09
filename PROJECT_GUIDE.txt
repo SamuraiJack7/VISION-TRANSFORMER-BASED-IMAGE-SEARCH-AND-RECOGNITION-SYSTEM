@@ -1,0 +1,138 @@
+PROJECT DOCUMENTATION
+=====================
+
+Image Understanding & Retrieval System
+
+This project uses Vision Transformers (DeiT-Tiny and MobileViT-XXS) for image 
+classification and text-based image search. We have two datasets - a small local 
+one with 600 images and a larger global one with 11,880 images.
+
+
+FOLDER STRUCTURE
+================
+
+The project is organized into two main folders:
+
+data1/ - Local dataset (600 images)
+    - images/ folder with training images
+    - labels.csv with image labels and attributes
+    - data1model1.ipynb - notebook for training DeiT-Tiny model
+    - data1_model2.ipynb - notebook for training MobileViT-XXS model
+    - best_model1_deit_tiny.pth - saved DeiT model weights
+    - best_model1_mobilevit_xxs.pth - saved MobileViT model weights
+    - image_understanding_ui.py - Gradio web interface
+
+data2/ - Global dataset (11,880 images)
+    - images/ folder with training images
+    - labels_global.csv with image labels and attributes
+    - data2model1.ipynb - notebook for training DeiT-Tiny model
+    - data2model2.ipynb - notebook for training MobileViT-XXS model
+    - best_model1_deit_tiny.pth - saved DeiT model weights
+    - best_model1_mobilevit_xxs.pth - saved MobileViT model weights
+    - gradio_app.py - Gradio web interface
+
+
+WHAT THE NOTEBOOKS DO
+======================
+
+Both data1 and data2 have similar notebooks, just trained on different datasets.
+
+Model 1 Notebooks (data1model1.ipynb / data2model1.ipynb):
+These train the DeiT-Tiny model. It's a Vision Transformer that learns to predict 
+not just the object class (like "backpack" or "bottle") but also attributes like 
+color, material, and condition. The training uses a two-phase approach - first we 
+freeze the pretrained backbone and just train the prediction heads, then we fine-tune 
+everything together. On the local dataset it gets around 92% accuracy, and on the 
+global dataset about 81%.
+
+The notebooks also include code for evaluation, making visualizations, and doing 
+text-based image retrieval (like searching for "blue plastic bottle").
+
+Model 2 Notebooks (data1_model2.ipynb / data2model2.ipynb):
+These train MobileViT-XXS, which is a much lighter model (5x smaller than DeiT). 
+It uses the same training approach and gets similar accuracy - around 81% on both 
+datasets. It's faster and more efficient, so it's better for deployment.
+
+
+HOW TO RUN THE UIs
+==================
+
+First, make sure you have the required packages:
+
+pip install torch torchvision timm gradio pillow pandas numpy scikit-learn tqdm
+
+
+Running the data1 UI (600 images):
+-----------------------------------
+
+1. Open terminal and go to the data1 folder:
+   cd data1
+
+2. Make sure you have the model files:
+   - best_model1_deit_tiny.pth
+   - best_model1_mobilevit_xxs.pth
+
+3. Run it:
+   python image_understanding_ui.py
+
+4. Wait a few minutes for startup (3-5 minutes). It needs to:
+   - Load both models
+   - Load images from the images/ folder
+   - Pre-compute predictions so searches are fast
+
+5. Your browser should open automatically to http://127.0.0.1:7860
+
+6. Using the interface:
+   - First tab: Upload any image, pick a model, click "Classify Image"
+   - Second tab: Type what you're looking for (like "blue plastic bottle"), 
+     pick a model, click "Search Images"
+
+7. When done, press Ctrl+C in the terminal to stop it
+
+
+Running the data2 UI (11,880 images):
+--------------------------------------
+
+1. Go to data2 folder:
+   cd data2
+
+2. Make sure these files exist:
+   - best_model1_deit_tiny.pth
+   - best_model1_mobilevit_xxs.pth
+   - labels_global.csv
+   - images/ folder with all the images
+
+3. Run it:
+   python gradio_app.py
+
+4. This one takes longer to start up (3-6 minutes) because it has to analyze 
+   all 11,880 images with both models. You'll see progress bars. Just wait - 
+   this pre-computation makes searches instant later!
+
+5. Browser opens at http://127.0.0.1:7860
+
+6. Using it:
+   - First tab: Upload image, select model, click "Predict"
+   - Second tab: Search for images using text (like "black leather wallet")
+     Results come back in 2-3 seconds even with 11k+ images
+
+7. Stop with Ctrl+C when finished
+
+
+COMMON ISSUES
+=============
+
+"Model file not found" - Check that the .pth files are in the right folder
+
+"CUDA out of memory" - Close other programs using the GPU, or edit the code 
+to use CPU instead of GPU
+
+"Port 7860 already in use" - Either close whatever is using that port, or 
+change the port number in the Python file
+
+"Browser doesn't open" - Just manually go to http://127.0.0.1:7860
+
+Search returns nothing - Try simpler keywords or check your spelling
+
+
+That's it! The UIs are pretty straightforward once they're running.

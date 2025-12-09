@@ -1,0 +1,12 @@
+{
+  "model": "mobilevit_xxs",
+  "num_classes": 10,
+  "num_colors": 15,
+  "num_materials": 9,
+  "num_conditions": 4,
+  "train_samples": 447,
+  "val_samples": 100,
+  "batch_size": 32,
+  "device": "cuda",
+  "timestamp": "2025-11-03 14:49:28"
+}

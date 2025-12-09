@@ -1,0 +1,12 @@
+{
+  "model": "deit_small_patch16_224",
+  "num_classes": 10,
+  "num_colors": 15,
+  "num_materials": 9,
+  "num_conditions": 4,
+  "train_samples": 497,
+  "val_samples": 103,
+  "batch_size": 32,
+  "device": "cuda",
+  "timestamp": "2025-10-30 12:59:14"
+}

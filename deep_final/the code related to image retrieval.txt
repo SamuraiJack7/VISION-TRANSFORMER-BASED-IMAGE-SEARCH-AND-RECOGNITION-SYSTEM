@@ -1,0 +1,1 @@
+the code related to image retrieval and classification is present in ui files donot run those cells in notebook they are for reference and are updated kindly check the ui file for code related to image classificationa nd retrevial
